@@ -1,0 +1,59 @@
+\newlength{\newTextWidth}
+\newlength{\newMinWidth}
+\newlength{\newMinHeight}
+\setlength{\newTextWidth}{2.9cm}
+\setlength{\newMinWidth}{0.16\textwidth}
+\setlength{\newMinHeight}{0.14\textheight}
+
+\newcommand\HighlightedNode{none}
+\newcommand\Highlight[1]{\renewcommand\HighlightedNode{#1}}
+
+\makeatletter 
+
+\long\def\ifnodedefined#1#2#3{%
+    \@ifundefined{pgf@sh@ns@#1}{#3}{#2}%
+}
+\makeatother
+
+\newcommand\methodologyFig{
+    \begin{tikzpicture}[
+        body/.style={
+            rectangle, % shape
+            very thick, % border
+            draw=white!30!UniTangerina!70, % outline
+            % top color=white,
+            top color=white!70!UniTangerina!30,
+            bottom color=white!70!UniTangerina!30,
+            font=\small, % Font
+            align=center,
+            x=0em,
+            y=0em,
+            node distance=.8em,
+            >=stealth'
+        }]
+        
+        \node (P1) [body, text width=\newTextWidth, minimum height=\newMinHeight, minimum width=\newMinWidth] 
+        {\hyperlink{P1}{Part 1}};
+        
+        \node (P2) [body, below=of P1, text width=\newTextWidth, minimum height=\newMinHeight, minimum width=\newMinWidth]
+        {\hyperlink{P2}{Part 2}};
+        
+        \node (P3) [body, below=of P2, text width=\newTextWidth, minimum height=\newMinHeight, minimum width=\newMinWidth]
+        {\hyperlink{P3}{Part 3\\(\textbf{Click Here})}};
+        
+        \node (P4) [body, below=of P3, text width=\newTextWidth, minimum height=\newMinHeight, minimum width=\newMinWidth]
+        {\hyperlink{P4}{Part 4}};
+        
+        \node (P5) [body, below=of P4, text width=\newTextWidth, minimum height=\newMinHeight, minimum width=\newMinWidth]
+        {\hyperlink{P5}{Part 5}};
+        
+        \path (P1) edge[->] (P2);
+        \path (P2) edge[->] (P3);
+        \path (P3) edge[->] (P4);
+        \path (P4) edge[->] (P5);
+        
+        \ifnodedefined{\HighlightedNode}{
+            \draw [ultra thick,UniTangerina,dashed] (\HighlightedNode.center) circle [x radius=4.7em,y radius=1.8em];
+            }{}
+        
+    \end{tikzpicture}}

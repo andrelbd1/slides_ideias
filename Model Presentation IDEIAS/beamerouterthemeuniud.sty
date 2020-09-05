@@ -1,0 +1,58 @@
+\mode<presentation>
+
+% Frame title
+\defbeamertemplate*{frametitle}{uniud}[1][]
+{
+
+\begin{tikzpicture}
+\useasboundingbox (0,-0.05) rectangle(\the\paperwidth,0.95);
+
+% Three-colored line
+ \fill[color=UniWhite] (-1,0) rectangle(0,1);
+ \fill[color=UniWhite] (0,0) rectangle(1,1);
+ \fill[color=UniWhite] (0,0) rectangle(\the\paperwidth,1);
+ 
+ % Logo in the box
+  \node[inner sep=0pt] (logo) at (14.1,0.5){\includegraphics[height=0.7cm]{graphics/Ideias.png}};
+\end{tikzpicture}
+
+% If we don't have a subtitle, put the title
+% at the center of the header
+\ifx\insertframesubtitle\@empty
+
+  \begin{textblock*}{15cm}(0.5cm,0.3cm)
+  {\usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}\insertframetitle}
+  \end{textblock*}
+
+\else
+% If we have both title and subtitle, stack them
+  \begin{textblock*}{10cm}(0.5cm,0.1cm)
+  {\usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}\insertframetitle}
+  \end{textblock*}
+
+  \begin{textblock*}{10cm}(0.4cm,0.6cm)
+  {\usebeamercolor[fg]{framesubtitle}\usebeamerfont{framesubtitle}\insertframesubtitle}
+  \end{textblock*}
+
+\fi
+
+}
+
+% Frame footer
+\setbeamertemplate{footline}
+{
+\ifnum\thepage>1
+\begin{tikzpicture}
+\useasboundingbox (0,0) rectangle(\the\paperwidth,1);
+
+\end{tikzpicture}
+
+\begin{textblock*}{7cm}(\dimexpr\the\paperwidth-7.1cm,8.65cm) 
+\raggedleft
+{\usebeamercolor[fg]{title in head/foot}\usebeamerfont{title in head/foot}\insertframenumber/\inserttotalframenumber}
+\end{textblock*}
+
+\fi
+}
+
+\mode<all>
